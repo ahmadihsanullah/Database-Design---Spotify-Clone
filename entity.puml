@@ -94,16 +94,24 @@ entity Concert {
 
 ' relasi table
 ' many to many  
-Artist }|--|{ Album 
+Artist }|--|{ Album : Has
 ' one to many
-Album ||--|{ Song
+Album ||--|{ Song : Contains
 ' many to many
-Artist }|--|{ Song 
+Artist }|--|{ Song : Sing
 ' 0 atau 1 ke 1 atau banyak
 PlaylistCategory |o--|{ Playlist
 'playlist wajib punya 1 user
-User ||--|{ Playlist
+User ||--o{ Playlist : Create
 ' bisa saja playlist tidak memiliki lagu, begitupun sebalikya
-Playlist }o--o{ Song
+Playlist }o--o{ Song : Contains
+PodcastCategory ||--o{ Podcast : Contains
+User ||--o{ Podcast : Create
+Podcast ||--o{ Episode : Contains
+Artist }|--o{ Concert: Perform
+User }o--o{ Artist : Follow 
+User }o--o{ Song : Liked Song
+User }o--o{ Playlist : Follow
+
 
 @enduml
